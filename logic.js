@@ -91,6 +91,7 @@ const marvelQuestions = [
     correctAnswer: "answerB",
   },
 ];
+
 //  reset right/wrong
 function resetAnswerSolutionButton() {
   const answerChoices = document.querySelectorAll(".answer-button");
@@ -125,6 +126,13 @@ let questionID = 0;
 function nextQuestion() {
   resetAnswerSolutionButton();
 
+  function updateQuestionNumber() {
+    const numberElement = document.querySelector(".number-of-questions");
+    numberElement.textContent = `Frage ${questionID + 1}.  von ${
+      marvelQuestions.length
+    }.`;
+  }
+
   if (questionID >= marvelQuestions.length - 1) {
     alert("YOU HAVE REACHED THE ENDGAME WITH " + score + " POINTS");
     return;
@@ -153,6 +161,7 @@ function nextQuestion() {
   });
 
   updateBackground();
+  updateQuestionNumber();
 }
 
 // update Background
@@ -179,7 +188,6 @@ function updateBackground() {
     wrapper.style.backgroundPosition = "center";
   }
 }
-
 // right/wrong logic
 let score = 0;
 
@@ -216,6 +224,7 @@ function nextPage() {
   quizAppContainer.classList.add("quizapp-container");
 
   const numberOfQuestions = document.createElement("h4");
+  numberOfQuestions.id = "numberOfQuestion";
   numberOfQuestions.textContent = "Frage 1. von 10.";
   numberOfQuestions.classList.add("number-of-questions");
 
