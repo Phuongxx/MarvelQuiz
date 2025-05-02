@@ -94,7 +94,6 @@ body {
 }
 
 .answer-button:hover {
-  background-color: rgba(36, 65, 107, 0.8);
   box-shadow: 5px 5px 20px #000;
 }
 
