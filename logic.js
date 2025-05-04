@@ -91,6 +91,22 @@ const marvelQuestions = [
     correctAnswer: "answerB",
   },
 ];
+// variables
+let questionID = 0;
+
+let questionAnswered = false;
+
+let score = 0;
+
+let marvelBackgroundImg = [
+  "img/question1.jpg",
+  "img/question2.jpg",
+  "img/question3.jpg",
+  "img/question4.jpg",
+  "img/question5.jpg",
+  "img/question6.jpg",
+  "img/question7.jpg",
+];
 
 //  reset right/wrong
 function resetAnswerSolutionButton() {
@@ -121,10 +137,9 @@ function randomAnswer(answers) {
 
 // nextPage
 
-let questionID = 0;
-
 function nextQuestion() {
   resetAnswerSolutionButton();
+  questionAnswered = false;
 
   function updateQuestionNumber() {
     const numberElement = document.querySelector(".number-of-questions");
@@ -166,16 +181,6 @@ function nextQuestion() {
 
 // update Background
 
-let marvelBackgroundImg = [
-  "img/question1.jpg",
-  "img/question2.jpg",
-  "img/question3.jpg",
-  "img/question4.jpg",
-  "img/question5.jpg",
-  "img/question6.jpg",
-  "img/question7.jpg",
-];
-
 function updateBackground() {
   const wrapper = document.querySelector('[data-id="displayQuestion"]');
   if (wrapper) {
@@ -189,9 +194,11 @@ function updateBackground() {
   }
 }
 // right/wrong logic
-let score = 0;
-
 function addAnswer(answerId) {
+  if (questionAnswered) {
+    return;
+  }
+
   const correctId = marvelQuestions[questionID].correctAnswer;
   const rightAnswer = document.querySelector(`[data-id="${correctId}"]`);
   const clickedAnswer = document.querySelector(`[data-id="${answerId}"]`);
@@ -204,6 +211,7 @@ function addAnswer(answerId) {
     clickedAnswer.classList.add("wrong-answer");
     rightAnswer.classList.add("right-answer");
   }
+  questionAnswered = true;
 }
 
 //  sokutionButton
